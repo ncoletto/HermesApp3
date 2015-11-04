@@ -9,13 +9,6 @@
 <link rel="stylesheet" href="js/jquery.mobile.structure-1.4.5.min.css" />
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
-    <style>
-        #content {
-            padding: 0 !important;
-        }
-    </style>  
-
-
 <link href='http://fonts.googleapis.com/css?family=Squada+One' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Russo+One' rel='stylesheet' type='text/css'>
@@ -23,37 +16,6 @@
 
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/jquery.mobile-1.4.5.min.js"></script>    
-
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>   
-
-    <script>
-        $(document).on('pageshow', '#mapa',function(e,data){   
-         
-            $('#content').height(getRealContentHeight());
-             
-           // This is the minimum zoom level that we'll allow
-           var minZoomLevel = 12;
- 
-           var map = new google.maps.Map(document.getElementById('map_canvas'), {
-              zoom: minZoomLevel,
-              center: new google.maps.LatLng(38.50, -90.50),
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-           });          
-        });
- 
-        function getRealContentHeight() {
-            var header = $.mobile.activePage.find("div[data-role='header']:visible");
-            var footer = $.mobile.activePage.find("div[data-role='footer']:visible");
-            var content = $.mobile.activePage.find("div[data-role='content']:visible:visible");
-            var viewport_height = $(window).height();
- 
-            var content_height = viewport_height - header.outerHeight() - footer.outerHeight();
-            if((content.outerHeight() - header.outerHeight() - footer.outerHeight()) <= viewport_height) {
-                content_height -= (content.outerHeight() - content.height());
-            } 
-            return content_height;
-        }
-    </script> 
 
 
 	
@@ -94,7 +56,7 @@
 
     </script>
 
-	
+
 	
 </head>
 <body>
@@ -183,23 +145,61 @@
 	</div><!-- /pagina -->
 
 <!-- pagina -->
-				<div data-role="page" id="mapa">
-					<div data-theme="a" data-role="header">
-						<h3>
-							GPS
-						</h3>
-					</div>
-			 
-					<div data-role="content" id="content">
-						<div id="map_canvas" style="height:100%"></div>
-					</div>
-			 
-					<div data-theme="a" data-role="footer" data-position="fixed">
-						<h3>
-							First Page
-						</h3>
-					</div>
-				</div>
+	<div data-role="page" id="mapa" data-theme="a" data-url="mapa">
+		<div data-role="header" data-theme="a">
+			<h1>GPS</h1>
+			<a href="#left-panel" data-theme="a" data-icon="arrow-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
+			<a href="#right-panel" data-theme="a" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a>
+		</div><!-- /header -->
+		<div data-role="content">
+            <div data-role="content" class="none">
+           		<img id="tiempoimg" src="img/mapa.jpg">
+            </div>
+		</div><!-- /content -->
+			<div data-role="panel" id="left-panel" data-display="push" data-theme="a">
+			        <p>Menú</p>
+
+						<ul data-role="listview">
+						    <li><a href="#tiempo">Tiempo</a></li>
+						    <li><a href="#mapa">Mapa</a></li>
+						    <li><a href="#bluetooth">Bluetooth</a></li>
+						    <li><a href="#inicio">Salir</a></li>
+						</ul>
+			</div><!-- /panel -->
+		<div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="a">
+			        <p id="configuracion">CONFIGURACIÓN </p>
+						<form>
+						    <label for="flip-1">Música</label>
+						    <select id="flip-1" name="flip-1" data-role="slider">
+						        <option value="off">NO</option>
+						        <option value="on">SI</option>
+						    </select>
+						</form>
+						<form>
+						    <label for="flip-1">Llamadas</label>
+						    <select id="flip-1" name="flip-1" data-role="slider">
+						        <option value="off">NO</option>
+						        <option value="on">SI</option>
+						    </select>
+						</form>
+						<form>
+						    <label for="flip-1">Alerta Automática</label>
+						    <select id="flip-1" name="flip-1" data-role="slider">
+						        <option value="off">NO</option>
+						        <option value="on">SI</option>
+						    </select>
+						</form>
+						
+						<div class="ui-field-contain">
+						    <label for="textinput-fc"></label>
+						    <input type="text" name="textinput-fc" id="textinput-fc" placeholder="Nro. de teléfono S.O.S." value="">
+						</div>
+		</div><!-- /panel -->
+		
+		<div data-role="footer" data-position="fixed">
+			<p id="incidente"></p>
+		</div><!-- /footer -->
+	</div><!-- /pagina -->
 
 	
 	<!-- pagina -->
